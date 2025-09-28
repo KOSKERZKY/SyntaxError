@@ -25,11 +25,11 @@ python3 --version
 ## Temas a Reforzar (Tienen su propio archivo .py en el repo):
 - Introduccion
 - Tipos de datos
-- Uso de Variables
+- Operaciones }-------┐-----Importante relacionar estos dos temas
+- Uso de Variables}--┘
 - Condicionales
 - Funciones
 - Bucles
 - Listas & Diccionarios
-- Operaciones
 - Bibliotecas Utiles
 - Plus (puede ser opcional)
