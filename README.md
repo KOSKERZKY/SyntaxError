@@ -24,7 +24,6 @@ python3 --version
 
 ## Temas a Reforzar (Tienen su propio archivo .py en el repo):
 - Introduccion
-- Palabras Clave escenciales
 - Tipos de datos
 - Uso de Variables
 - Condicionales
