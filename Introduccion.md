@@ -18,3 +18,6 @@ En proyectos que exigen velocidad máxima, como ciertos sistemas operativos o so
 Para la creación de aplicaciones móviles que requieren máxima eficiencia y acceso a hardware de bajo nivel, otros lenguajes son más adecuados. 
 - Sistemas críticos de producción:  
 En servicios donde la estabilidad y la predictibilidad son fundamentales, las características de tipado dinámico de Python pueden ser una desventaja, según algunos profesionales. 
+
+Aparte de hablar sobre que es Python quiero decir que estare ayudando poniendo indicaciones o guias de varias cosas con comentarios que se hacen con el numeral (#).  
+Respondere dudas a en mi ig: jk3q0
