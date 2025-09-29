@@ -13,7 +13,7 @@ else: #caso contrario mostrara 'Eres menor de edad'
 
 #Aprovecho a explicar otro ejemplo de condicionales de ese libro
 precio = float(input("Ingresa el precio del producto: ")) #transforma la cifra en un decimal por ejemplo 1 -> 1.00
-if >= 100: #Si el valor de 'precio' es mayor a 100
+if precio >= 100: #Si la variable 'precio' tiene un valor mayor a 100...
   descuento = precio * 0.1 #Se crea una variable que contiene el valor de 'precio' multiplicado por 0.1 que vendria siendo 
   precio_con_descuento = precio - descuento #Se crea una variable que resta el valor de 'precio' con la variable 'descuento'
   print("Se aplica un 10% de descuento") #Imprime esto en la ventana
