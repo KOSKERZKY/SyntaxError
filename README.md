@@ -32,5 +32,6 @@ python3 --version
 6. Funciones
 7. Bucles
 8. Listas & Diccionarios
-9. Bibliotecas Utiles
-0. Plus (puede ser opcional)
+
+- Puedo ayudarte en alguna duda en mi ig:
+**jk3q0**
