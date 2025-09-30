@@ -13,6 +13,8 @@
 #Estructura de una tupla
 #mi_tupla = (elemento0, elemento1, elemento2, ...) #tambien se sigue cumpliendo de que la indexacion empieza en 0
 
+#Estructura de un diccionario
+#mi_diccionario = {clave1: valor1, clave2: valor2, clave3: valor3, ...} #las claves pueden ser de cualquier tipo de dato inmutable (str, int, float, bool, tuple) y los valores pueden ser de cualquier tipo de dato
 
 
 #Mostrare ejemplos de cada una y una breve explicacion
@@ -51,6 +53,33 @@ mi_tupla = (1, 2.5, "Hola", True) #una tupla puede contener diferentes tipos de 
 print(mi_tupla) #muestra toda la tupla # 1, 2.5, "Hola", True
 print(mi_tupla[2]) #muestra el tercer elemento de la tupla # Hola
 #a comparacion de las listas normales y anidadas aqui no puedes modificar los valores o eliminar valores dentro de la tupla
+
+
+
+#las claves deben ser unicas dentro de un diccionario
+#Los diccionarios no tienen un orden especifico como las listas
+#Los diccionarios son utiles para almacenar datos relacionados entre si
+
+#Un ejemplo de un diccionario
+#3. Diccionarios
+mi_diccionario = {
+    "nombre": "Juan",
+    "edad": 30, 
+    "ciudad": "Madrid"
+} #un diccionario puede contener diferentes tipos de datos
+
+print(mi_diccionario) #muestra todo el diccionario
+print(mi_diccionario["nombre"]) #muestra el valor asociado a la clave "nombre" # Juan
+
+#Modificar elementos dentro de un diccionario
+mi_diccionario["edad"] = 31 #cambia el valor asociado a la clave "edad" #ahora la edad es 31
+print(mi_diccionario) #muestra todo el diccionario actualizado
+mi_diccionario["pais"] = "España" #agrega una nueva clave-valor al diccionario #clave "pais" con valor "España"
+print(mi_diccionario) #muestra todo el diccionario actualizado
+del mi_diccionario["ciudad"] #elimina la clave-valor asociada a la clave "ciudad"
+print(mi_diccionario) #muestra todo el diccionario actualizado
+print(len(mi_diccionario)) #muestra la cantidad de pares clave-valor en el diccionario
+
 
 #si llegaste a entender todo tienes mi respeto :]
 #se me complico mucho intentar explicarlo de una manera sencilla
