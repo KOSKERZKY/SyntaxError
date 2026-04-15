@@ -5,7 +5,7 @@ Aclarado eso continuemos con la Descarga...
 ### - Descarga:  
 Entra a el Sitio Web Oficial: [Click aqui](https://www.python.org/downloads/)  
 El programa detectara tu OS y instalara dependencias necesarias para el uso de Python.  
-Busca la version reciente (3.13.7)  
+Busca la version reciente (3.14.4)  
 Ejecuta el instalador y poterior a eso tendras una interfaz de instalacion.  
 
 ### - Instalacion:
