@@ -23,7 +23,7 @@ sudo apt install python3
 python3 --version  
 
 ## Temas a Reforzar (Tienen su propio archivo .py en el repo):
-1. Introduccion
+1. [Introduccion]()
 2. Tipos de datos
 3. Funciones de Python }-┐-----Importante relacionar estos dos temas
 4. Uso de Variables }------┘
