@@ -34,4 +34,4 @@ python3 --version
 8. Listas & Diccionarios
 
 - Puedo ayudarte en alguna duda en mi ig:
-**jk3q0**
+**cz.gme**
