@@ -16,7 +16,7 @@ def suma(a, b): #definimos una funcion y los parametros que se deben rellenar
 s = suma(5 + 3) #Aqui llamamos a la funcion 'suma()' y le asignamos valores para a y b
 print(s) # 8 
 
-#Existe una manera de hacer que ahorrarce el poner print() cada que quieres mostrar el resultado y es poniendolo dentro de la funcion
+#Existe una manera de hacer que ahorrarse el poner print() cada que quieres mostrar el resultado y es poniendolo dentro de la funcion
 def resta(a, b): #definimos una funcion y los parametros que se deben rellenar
   print(a - b) #imprime automaticamente cuando se llama la funcion
 
