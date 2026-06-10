@@ -20,4 +20,4 @@ Para la creación de aplicaciones móviles que requieren máxima eficiencia y ac
 En servicios donde la estabilidad y la predictibilidad son fundamentales, las características de tipado dinámico de Python pueden ser una desventaja, según algunos profesionales. 
 
 Aparte de hablar sobre que es Python quiero decir que estare ayudando poniendo indicaciones o guias de varias cosas con comentarios que se hacen con el numeral (#).  
-Respondere dudas a en mi ig: jk3q0
+Respondere dudas a en mi ig: cz. gme
